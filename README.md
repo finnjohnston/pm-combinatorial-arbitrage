@@ -10,15 +10,6 @@ A small durable remainder is real and capturable. It concentrates in attention g
 
 Two layers of the result should be read differently. The prevalence and persistence of displayed crossings are are properties of the live market that hold regardless of whether the engine trades. The profit-and-loss claims are conditional on the fill model — they follow from a deliberately conservative simulation of participation, latency, and book erosion, not from live order placement.
 
-## Architecture
-
-- **Feed** (`feed/`) — maintains authenticated Kalshi connections: a websocket streaming order book deltas and market lifecycle events for every liquid ticker, and a REST client for market discovery.
-- **Market State** (`book/`, `graph/`) — order books and an event graph mapping every mutually-exclusive outcome set. Markets are promoted to live order book streaming when liquidity appears and demoted when it decays.
-- **Strategy** (`optimizer/`) — walks full book depth to build tiered opportunities per event, nets out Kalshi's fee schedule, and allocates capital across concurrent opportunities by return on capital, subject to per-event position caps.
-- **Execution** (`execution/`) — simulates taker fills against the live book with latency and participation-rate modeling, tracks book erosion during order flight, and enforces limit prices so fills can never execute at worse levels than the ones that justified the trade.
-- **Risk** (`risk/`) — resolves partial fills by choosing between completing the hedge and unwinding, capped by both available capital and break-even pricing; residual exposure that can't be closed is tracked rather than discarded.
-- **Accounting** (`portfolio/`) — a capital ledger with winner-dependent settlement: every position, hedged or ragged, is marked to its actual payout when the event resolves. Trade history persists to SQLite.
-
 ## Setup
 
 Requires Python 3.11+ and Kalshi API credentials (an API key ID and its RSA private key).
