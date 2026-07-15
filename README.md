@@ -1,4 +1,4 @@
-# Kalshi Combinatorial Arbitrage Engine
+# Prediction Market Combinatorial Arbitrage Engine
 
 In a mutually-exclusive Kalshi event, exactly one outcome resolves to YES and pays $1. If the prices of all outcomes sum to less than $1.00, buying every one locks in a guaranteed profit at settlement (with a symmetric sell-side case when prices sum above $1.00). This engine scans Kalshi's full market universe in real time, streams order books for the liquid subset, and detects, sizes, and executes these multi-leg trades whenever there is an edge. It does not place real orders on Kalshi. Execution is a high-fidelity simulation against live market data, modeling real order book depth, fees, collateral, and capital constraints.
 
